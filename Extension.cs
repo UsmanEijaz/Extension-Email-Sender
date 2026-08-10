@@ -224,23 +224,23 @@ namespace OutSystems.NssExtension
                     return;
                 }
 
-
+                GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext, $"{logoPath}", "Logo image path");
                 // Read logo
                 byte[] logoData = File.ReadAllBytes(logoPath);
 
                 // Create memory stream
                 MemoryStream logoStream = new MemoryStream(logoData);
 
+                ContentType contentType = new ContentType("image/png")
+                {
+                    Name = "MoHMainLeftAligned.png"
+                };
+
                 // Create inline image
-                LinkedResource logo = new LinkedResource(logoStream,"image/png");
+                LinkedResource logo = new LinkedResource(logoStream, contentType);
 
 
-                // IMPORTANT:
-                // This must match src="cid:mohlogo"
-                // in your HTML template.
-
-                logo.ContentId = "mohlogo";
-                logo.ContentType.Name ="MoHMainLeftAligned.png";
+                logo.ContentId = "MoHMainLeftAligned";
                 logo.TransferEncoding = TransferEncoding.Base64;
 
                 // Add image to HTML view
