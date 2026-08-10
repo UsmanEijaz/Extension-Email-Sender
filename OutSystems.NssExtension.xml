@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OutSystems.NssExtension</name>
+    </assembly>
+    <members>
+        <member name="M:OutSystems.NssExtension.CssExtension.MssTestEmailSender(System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssExtension.CssExtension.MssEmailSender(System.String,System.String,System.String,System.String,OutSystems.NssExtension.RLTemplateParameterRecordList,OutSystems.NssExtension.RLAttachmentsRecordList)">
+            <summary>
+            
+            </summary>
+            <param name="ssEmails"></param>
+            <param name="ssCCEmails"></param>
+            <param name="ssSubject"></param>
+            <param name="ssMessage"></param>
+            <param name="ssParameters"></param>
+            <param name="ssAttachments"></param>
+        </member>
+        <member name="M:OutSystems.NssExtension.IssExtension.MssTestEmailSender(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="ssEmails"></param>
+        </member>
+        <member name="M:OutSystems.NssExtension.IssExtension.MssEmailSender(System.String,System.String,System.String,System.String,OutSystems.NssExtension.RLTemplateParameterRecordList,OutSystems.NssExtension.RLAttachmentsRecordList)">
+            <summary>
+            
+            </summary>
+            <param name="ssEmails"></param>
+            <param name="ssCCEmails"></param>
+            <param name="ssSubject"></param>
+            <param name="ssMessage"></param>
+            <param name="ssParameters"></param>
+            <param name="ssAttachments"></param>
+        </member>
+        <member name="T:OutSystems.NssExtension.STTemplateParameterStructure">
+            <summary>
+            Structure <code>STTemplateParameterStructure</code> that represents the Service Studio structure
+             <code>TemplateParameter</code> <p> Description: </p>
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssExtension.STTemplateParameterStructure.Read(System.Data.IDataReader,System.Int32@)">
+            <summary>
+            Read a record from database
+            </summary>
+            <param name="r"> Data base reader</param>
+            <param name="index"> index</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.STTemplateParameterStructure.ReadDB(System.Data.IDataReader)">
+            <summary>
+            Read from database
+            </summary>
+            <param name="r"> Data reader</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.STTemplateParameterStructure.ReadIM(OutSystems.NssExtension.STTemplateParameterStructure)">
+            <summary>
+            Read from record
+            </summary>
+            <param name="r"> Record</param>
+        </member>
+        <member name="T:OutSystems.NssExtension.STAttachmentsStructure">
+            <summary>
+            Structure <code>STAttachmentsStructure</code> that represents the Service Studio structure
+             <code>Attachments</code> <p> Description: </p>
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssExtension.STAttachmentsStructure.Read(System.Data.IDataReader,System.Int32@)">
+            <summary>
+            Read a record from database
+            </summary>
+            <param name="r"> Data base reader</param>
+            <param name="index"> index</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.STAttachmentsStructure.ReadDB(System.Data.IDataReader)">
+            <summary>
+            Read from database
+            </summary>
+            <param name="r"> Data reader</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.STAttachmentsStructure.ReadIM(OutSystems.NssExtension.STAttachmentsStructure)">
+            <summary>
+            Read from record
+            </summary>
+            <param name="r"> Record</param>
+        </member>
+        <member name="T:OutSystems.NssExtension.ENNamesEntityRecord">
+            <summary>
+            Entity <code>ENNamesEntityRecord</code> that represents the Service Studio entity
+             <code>Names</code> <p> Description: </p>
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssExtension.ENNamesEntityRecord.Read(System.Data.IDataReader,System.Int32@)">
+            <summary>
+            Read a record from database
+            </summary>
+            <param name="r"> Data base reader</param>
+            <param name="index"> index</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.ENNamesEntityRecord.ReadDB(System.Data.IDataReader)">
+            <summary>
+            Read from database
+            </summary>
+            <param name="r"> Data reader</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.ENNamesEntityRecord.ReadIM(OutSystems.NssExtension.ENNamesEntityRecord)">
+            <summary>
+            Read from record
+            </summary>
+            <param name="r"> Record</param>
+        </member>
+        <member name="T:OutSystems.NssExtension.RCNamesRecord">
+            <summary>
+            Structure <code>RCNamesRecord</code>
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssExtension.RCNamesRecord.Read(System.Data.IDataReader,System.Int32@)">
+            <summary>
+            Read a record from database
+            </summary>
+            <param name="r"> Data base reader</param>
+            <param name="index"> index</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RCNamesRecord.ReadDB(System.Data.IDataReader)">
+            <summary>
+            Read from database
+            </summary>
+            <param name="r"> Data reader</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RCNamesRecord.ReadIM(OutSystems.NssExtension.RCNamesRecord)">
+            <summary>
+            Read from record
+            </summary>
+            <param name="r"> Record</param>
+        </member>
+        <member name="T:OutSystems.NssExtension.RCTemplateParameterRecord">
+            <summary>
+            Structure <code>RCTemplateParameterRecord</code>
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssExtension.RCTemplateParameterRecord.Read(System.Data.IDataReader,System.Int32@)">
+            <summary>
+            Read a record from database
+            </summary>
+            <param name="r"> Data base reader</param>
+            <param name="index"> index</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RCTemplateParameterRecord.ReadDB(System.Data.IDataReader)">
+            <summary>
+            Read from database
+            </summary>
+            <param name="r"> Data reader</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RCTemplateParameterRecord.ReadIM(OutSystems.NssExtension.RCTemplateParameterRecord)">
+            <summary>
+            Read from record
+            </summary>
+            <param name="r"> Record</param>
+        </member>
+        <member name="T:OutSystems.NssExtension.RCAttachmentsRecord">
+            <summary>
+            Structure <code>RCAttachmentsRecord</code>
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssExtension.RCAttachmentsRecord.Read(System.Data.IDataReader,System.Int32@)">
+            <summary>
+            Read a record from database
+            </summary>
+            <param name="r"> Data base reader</param>
+            <param name="index"> index</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RCAttachmentsRecord.ReadDB(System.Data.IDataReader)">
+            <summary>
+            Read from database
+            </summary>
+            <param name="r"> Data reader</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RCAttachmentsRecord.ReadIM(OutSystems.NssExtension.RCAttachmentsRecord)">
+            <summary>
+            Read from record
+            </summary>
+            <param name="r"> Record</param>
+        </member>
+        <member name="T:OutSystems.NssExtension.RLNamesRecordList">
+            <summary>
+            RecordList type <code>RLNamesRecordList</code> that represents a record list of <code>Names</code>
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLNamesRecordList.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLNamesRecordList.#ctor(System.Data.IDbTransaction)">
+            <summary>
+            Constructor with transaction parameter
+            </summary>
+            <param name="trans"> IDbTransaction Parameter</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLNamesRecordList.#ctor(System.Data.IDbTransaction,OutSystems.HubEdition.RuntimePlatform.Db.OSList{OutSystems.NssExtension.RCNamesRecord}.ReadDBMethodDelegate)">
+            <summary>
+            Constructor with transaction parameter and alternate read method
+            </summary>
+            <param name="trans"> IDbTransaction Parameter</param>
+            <param name="alternateReadDBMethod"> Alternate Read Method</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLNamesRecordList.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Constructor declaration for serialization
+            </summary>
+            <param name="info"> SerializationInfo</param>
+            <param name="context"> StreamingContext</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLNamesRecordList.NewList">
+            <summary>
+            Create as new list
+            </summary>
+            <returns>The new record list</returns>
+        </member>
+        <member name="T:OutSystems.NssExtension.RLTemplateParameterRecordList">
+            <summary>
+            RecordList type <code>RLTemplateParameterRecordList</code> that represents a record list of
+             <code>TemplateParameter</code>
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLTemplateParameterRecordList.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLTemplateParameterRecordList.#ctor(System.Data.IDbTransaction)">
+            <summary>
+            Constructor with transaction parameter
+            </summary>
+            <param name="trans"> IDbTransaction Parameter</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLTemplateParameterRecordList.#ctor(System.Data.IDbTransaction,OutSystems.HubEdition.RuntimePlatform.Db.OSList{OutSystems.NssExtension.RCTemplateParameterRecord}.ReadDBMethodDelegate)">
+            <summary>
+            Constructor with transaction parameter and alternate read method
+            </summary>
+            <param name="trans"> IDbTransaction Parameter</param>
+            <param name="alternateReadDBMethod"> Alternate Read Method</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLTemplateParameterRecordList.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Constructor declaration for serialization
+            </summary>
+            <param name="info"> SerializationInfo</param>
+            <param name="context"> StreamingContext</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLTemplateParameterRecordList.NewList">
+            <summary>
+            Create as new list
+            </summary>
+            <returns>The new record list</returns>
+        </member>
+        <member name="T:OutSystems.NssExtension.RLAttachmentsRecordList">
+            <summary>
+            RecordList type <code>RLAttachmentsRecordList</code> that represents a record list of
+             <code>Attachments</code>
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLAttachmentsRecordList.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLAttachmentsRecordList.#ctor(System.Data.IDbTransaction)">
+            <summary>
+            Constructor with transaction parameter
+            </summary>
+            <param name="trans"> IDbTransaction Parameter</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLAttachmentsRecordList.#ctor(System.Data.IDbTransaction,OutSystems.HubEdition.RuntimePlatform.Db.OSList{OutSystems.NssExtension.RCAttachmentsRecord}.ReadDBMethodDelegate)">
+            <summary>
+            Constructor with transaction parameter and alternate read method
+            </summary>
+            <param name="trans"> IDbTransaction Parameter</param>
+            <param name="alternateReadDBMethod"> Alternate Read Method</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLAttachmentsRecordList.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Constructor declaration for serialization
+            </summary>
+            <param name="info"> SerializationInfo</param>
+            <param name="context"> StreamingContext</param>
+        </member>
+        <member name="M:OutSystems.NssExtension.RLAttachmentsRecordList.NewList">
+            <summary>
+            Create as new list
+            </summary>
+            <returns>The new record list</returns>
+        </member>
+    </members>
+</doc>
