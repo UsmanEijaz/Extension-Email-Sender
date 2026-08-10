@@ -9,6 +9,7 @@ using System.Web;
 using OutSystems.RuntimeCommon;
 using System.Text;
 using System.Net.Mime;
+using System.Runtime.CompilerServices;
 
 namespace OutSystems.NssExtension
 {
@@ -107,11 +108,11 @@ namespace OutSystems.NssExtension
                 {
                     // Set the subject and body
                     mail.Subject = ssSubject;
+                    mail.SubjectEncoding = Encoding.UTF8;
                     mail.BodyEncoding = Encoding.UTF8;
-                    string finalMessage = ReplacePlaceholders(ssMessage, ssParameters);
-                    //mail.Body = finalMessage; //ReplacePlaceholders(ssMessage, ssParameters);
-                    //mail.IsBodyHtml = true;
-                    mail.Body = string.Empty;
+                    string finalMessage =  ReplacePlaceholders(ssMessage, ssParameters);
+
+                    GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext, $"Final email body length: {(finalMessage == null ? 0 : finalMessage.Length)}","Email");
 
                     AlternateView htmlView =
                      AlternateView.CreateAlternateViewFromString(
@@ -123,9 +124,12 @@ namespace OutSystems.NssExtension
                     AddLogo(htmlView);
 
                     mail.AlternateViews.Add(htmlView);
+                    mail.IsBodyHtml = true;
+                    mail.Body = finalMessage;
 
                     if (ssAttachments != null)
                         mail.Attachments.AddRange(AddAttachment(ssAttachments));
+
 
                     // Add an attachment
                     //string attachmentPath = @"C:\path\to\your\file.txt"; // Change to your file path
@@ -140,6 +144,8 @@ namespace OutSystems.NssExtension
                     // Send the email
                     smtp.Send(mail);
                     GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext, "Email sent successfully", "Email");
+                    smtp.Dispose();
+                    mail.Dispose();
                 }
                 else
                     GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext, "No Email to send", "Email");
@@ -204,7 +210,7 @@ namespace OutSystems.NssExtension
             return value;
         }
 
-        static void AddLogo(AlternateView htmlView) 
+        static void AddLogo(AlternateView htmlView)
         {
             try
             {
@@ -212,7 +218,7 @@ namespace OutSystems.NssExtension
                 string basePath = AppDomain.CurrentDomain.BaseDirectory;
 
                 // Logo path
-                string logoPath = Path.Combine(basePath,"Images","MoHMainLeftAligned.png");
+                string logoPath = Path.Combine(basePath, "Images", "MoHMainLeftAligned.png");
 
                 // Check whether logo exists
                 if (!File.Exists(logoPath))
@@ -227,38 +233,44 @@ namespace OutSystems.NssExtension
 
                 GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext, $"{logoPath}", "Logo image path");
                 // Read logo
-                byte[] logoData = File.ReadAllBytes(logoPath);
+                byte[] ImageBytes = File.ReadAllBytes(logoPath);
 
                 // Create memory stream
-                MemoryStream logoStream = new MemoryStream(logoData);
+                MemoryStream imageStream = new MemoryStream(ImageBytes);
 
-                ContentType contentType = new ContentType("image/png")
-                {
-                    Name = "MoHMainLeftAligned.png"
-                };
+                //ContentType contentType = new ContentType("image/png")
+                //{
+                //    Name = "MoHMainLeftAligned.png"
+                //};
 
                 // Create inline image
                 //LinkedResource logo = new LinkedResource(logoStream, contentType);
 
-                LinkedResource logo = new LinkedResource(logoStream, contentType)
-                {
-                    ContentId = "MoHMainLeftAligned",
-                    // CRITICAL FOR OUTLOOK: Tell Outlook this CID links directly to the resource
-                    ContentLink = new Uri("cid:MoHMainLeftAligned"),
-                    TransferEncoding = TransferEncoding.Base64
-                };
+                LinkedResource logo = new LinkedResource(imageStream, "image/png");
+                //{
+                //    ContentId = "MoHMainLeftAligned",
+                //    TransferEncoding = TransferEncoding.Base64,
+                //    //ContentLink = new Uri("cid:MoHMainLeftAligned")
+                //};
 
-                //logo.ContentId = "MoHMainLeftAligned";
+                logo.ContentId = "MoHMainLeftAligned";
+                logo.ContentType.MediaType =
+                    "image/png";
+                logo.ContentType.Name =
+                    "MoHMainLeftAligned.png";
+                logo.TransferEncoding =
+                    TransferEncoding.Base64;
+
                 //logo.TransferEncoding = TransferEncoding.Base64;
 
                 // Add image to HTML view
                 htmlView.LinkedResources.Add(logo);
 
-                GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext,$"Logo added successfully: {logoPath}","Email");
+                GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext, $"Logo added successfully: {logoPath}", "Email");
             }
             catch (Exception ex)
             {
-                GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext,$"Error adding logo: {ex}","Email");
+                GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext, $"Error adding logo: {ex}", "Email");
             }
         }
 
