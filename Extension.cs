@@ -109,8 +109,9 @@ namespace OutSystems.NssExtension
                     mail.Subject = ssSubject;
                     mail.BodyEncoding = Encoding.UTF8;
                     string finalMessage = ReplacePlaceholders(ssMessage, ssParameters);
-                    mail.Body = finalMessage; //ReplacePlaceholders(ssMessage, ssParameters);
-                    mail.IsBodyHtml = true;
+                    //mail.Body = finalMessage; //ReplacePlaceholders(ssMessage, ssParameters);
+                    //mail.IsBodyHtml = true;
+                    mail.Body = string.Empty;
 
                     AlternateView htmlView =
                      AlternateView.CreateAlternateViewFromString(
@@ -237,11 +238,18 @@ namespace OutSystems.NssExtension
                 };
 
                 // Create inline image
-                LinkedResource logo = new LinkedResource(logoStream, contentType);
+                //LinkedResource logo = new LinkedResource(logoStream, contentType);
 
+                LinkedResource logo = new LinkedResource(logoStream, contentType)
+                {
+                    ContentId = "MoHMainLeftAligned",
+                    // CRITICAL FOR OUTLOOK: Tell Outlook this CID links directly to the resource
+                    ContentLink = new Uri("cid:MoHMainLeftAligned"),
+                    TransferEncoding = TransferEncoding.Base64
+                };
 
-                logo.ContentId = "MoHMainLeftAligned";
-                logo.TransferEncoding = TransferEncoding.Base64;
+                //logo.ContentId = "MoHMainLeftAligned";
+                //logo.TransferEncoding = TransferEncoding.Base64;
 
                 // Add image to HTML view
                 htmlView.LinkedResources.Add(logo);
