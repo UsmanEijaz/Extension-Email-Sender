@@ -9,7 +9,6 @@ using System.Web;
 using OutSystems.RuntimeCommon;
 using System.Text;
 using System.Net.Mime;
-using System.Runtime.CompilerServices;
 
 namespace OutSystems.NssExtension
 {
@@ -76,7 +75,7 @@ namespace OutSystems.NssExtension
         /// <param name="ssMessage"></param>
         /// <param name="ssParameters"></param>
         /// <param name="ssAttachments"></param>
-        public void MssEmailSender(string ssEmails, string ssCCEmails, string ssSubject, string ssMessage, RLTemplateParameterRecordList ssParameters, RLAttachmentsRecordList ssAttachments)
+        public void MssEmailSender(string ssEmails, string ssCCEmails, string ssSubject, string ssMessage, RLTemplateParameterRecordList ssParameters, RLAttachmentsRecordList ssAttachments, byte[] ssLogo)
         {
             // TODO: Write implementation for action
             // TODO: Write implementation for action
@@ -110,9 +109,9 @@ namespace OutSystems.NssExtension
                     mail.Subject = ssSubject;
                     mail.SubjectEncoding = Encoding.UTF8;
                     mail.BodyEncoding = Encoding.UTF8;
-                    string finalMessage =  ReplacePlaceholders(ssMessage, ssParameters);
+                    string finalMessage = ReplacePlaceholders(ssMessage, ssParameters);
 
-                    GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext, $"Final email body length: {(finalMessage == null ? 0 : finalMessage.Length)}","Email");
+                    GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext, $"Final email body length: {(finalMessage == null ? 0 : finalMessage.Length)}", "Email");
 
                     AlternateView htmlView =
                      AlternateView.CreateAlternateViewFromString(
@@ -121,7 +120,7 @@ namespace OutSystems.NssExtension
                          MediaTypeNames.Text.Html
                      );
 
-                    AddLogo(htmlView);
+                    AddLogo(htmlView, ssLogo);
 
                     mail.AlternateViews.Add(htmlView);
                     mail.IsBodyHtml = true;
@@ -130,11 +129,6 @@ namespace OutSystems.NssExtension
                     if (ssAttachments != null)
                         mail.Attachments.AddRange(AddAttachment(ssAttachments));
 
-
-                    // Add an attachment
-                    //string attachmentPath = @"C:\path\to\your\file.txt"; // Change to your file path
-                    //Attachment attachment = new Attachment(attachmentPath);
-                    //mail.Attachments.Add(attachment);
 
                     // Configure the SMTP client
                     SmtpClient smtp = new SmtpClient("10.99.8.161", 25); // Use your SMTP server and port
@@ -210,63 +204,28 @@ namespace OutSystems.NssExtension
             return value;
         }
 
-        static void AddLogo(AlternateView htmlView)
+        static void AddLogo(AlternateView htmlView, byte[] logoBytes)
         {
             try
             {
-                // Get extension runtime folder
-                string basePath = AppDomain.CurrentDomain.BaseDirectory;
-
-                // Logo path
-                string logoPath = Path.Combine(basePath, "Images", "MoHMainLeftAligned.png");
-
-                // Check whether logo exists
-                if (!File.Exists(logoPath))
+                if (logoBytes == null || logoBytes.Length == 0)
                 {
-                    GenericExtendedActions.LogMessage(
-                        AppInfo.GetAppInfo().OsContext,
-                        $"Logo not found: {logoPath}",
-                        "Email"
-                    );
-                    return;
+                    GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext, "Logo binary data is empty.", "Email"); return;
                 }
-
-                GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext, $"{logoPath}", "Logo image path");
-                // Read logo
-                byte[] ImageBytes = File.ReadAllBytes(logoPath);
-
                 // Create memory stream
-                MemoryStream imageStream = new MemoryStream(ImageBytes);
-
-                //ContentType contentType = new ContentType("image/png")
-                //{
-                //    Name = "MoHMainLeftAligned.png"
-                //};
-
-                // Create inline image
-                //LinkedResource logo = new LinkedResource(logoStream, contentType);
+                MemoryStream imageStream = new MemoryStream(logoBytes);
 
                 LinkedResource logo = new LinkedResource(imageStream, "image/png");
-                //{
-                //    ContentId = "MoHMainLeftAligned",
-                //    TransferEncoding = TransferEncoding.Base64,
-                //    //ContentLink = new Uri("cid:MoHMainLeftAligned")
-                //};
 
                 logo.ContentId = "MoHMainLeftAligned";
-                logo.ContentType.MediaType =
-                    "image/png";
-                logo.ContentType.Name =
-                    "MoHMainLeftAligned.png";
-                logo.TransferEncoding =
-                    TransferEncoding.Base64;
-
-                //logo.TransferEncoding = TransferEncoding.Base64;
+                logo.ContentType.MediaType = "image/png";
+                logo.ContentType.Name = "MoHMainLeftAligned.png";
+                logo.TransferEncoding = TransferEncoding.Base64;
 
                 // Add image to HTML view
                 htmlView.LinkedResources.Add(logo);
 
-                GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext, $"Logo added successfully: {logoPath}", "Email");
+                GenericExtendedActions.LogMessage(AppInfo.GetAppInfo().OsContext, $"Logo added successfully:", "Email");
             }
             catch (Exception ex)
             {
